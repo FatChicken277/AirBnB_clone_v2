@@ -14,48 +14,19 @@ package { 'nginx':
 
 # create files
 
-file { '/data/':
-    ensure =>  directory,
-    owner  => 'ubuntu',
-    group  => 'ubuntu',
-}
-
-file { '/data/web_static/':
-    ensure  =>  directory,
-    owner   => 'ubuntu',
-    group   => 'ubuntu',
-    require => File['/data/'],
-}
-
-file { '/data/web_static/releases/':
-    ensure  =>  directory,
-    owner   => 'ubuntu',
-    group   => 'ubuntu',
-    require => File['/data/web_static/'],
-}
-
 file { '/data/web_static/shared/':
     ensure  =>  directory,
-    owner   => 'ubuntu',
-    group   => 'ubuntu',
-    require => File['/data/web_static/'],
 }
 
 file { '/data/web_static/releases/test/':
     ensure  =>  directory,
-    owner   => 'ubuntu',
-    group   => 'ubuntu',
-    require => File['/data/web_static/releases'],
 }
 
 # html
 
 file { '/data/web_static/releases/test/index.html':
   ensure  => file,
-  owner   => 'ubuntu',
-  group   => 'ubuntu',
   content => "<html>\n\t<head>\n\t</head>\n\t<body>\n\t\tHolberton School\n\t</body>\n</html>"
-  require => File['/data/web_static/releases/test'],
 }
 
 # create symbolic link
@@ -63,7 +34,13 @@ file { '/data/web_static/releases/test/index.html':
 file { '/data/web_static/current':
   ensure  => link,
   target  => '/data/web_static/releases/test/',
-  require => File['/data/web_static/releases/test'],
+}
+
+# Change owner and group
+
+exec { 'owne_group':
+  command => 'chown -R ubuntu:ubuntu /data/',
+  path    => ['/usr/bin', '/bin'],
 }
 
 # config
