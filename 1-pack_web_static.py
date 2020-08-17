@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-"""This module contains a function that generates a .tgz 
+"""This module contains a function that generates a .tgz
     archive from the contents of the web_static.
 """
 from fabric.api import local
