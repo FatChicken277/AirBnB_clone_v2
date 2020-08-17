@@ -3,7 +3,7 @@
     generates a .tgz archive from the contents of the web_static and
     distributes an archive to your web servers
 """
-from fabric.api import local, env, settings
+from fabric.api import local, env
 from fabric.operations import run, put
 from datetime import datetime
 from os import path
