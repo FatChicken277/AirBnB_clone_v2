@@ -10,17 +10,8 @@ fi
 
 # Create the necessary folders if they don't exist.
 
-create_folder () {
-    if [ ! -d "$1" ]; then
-        mkdir "$1"
-    fi
-}
-
-create_folder /data/
-create_folder /data/web_static/
-create_folder /data/web_static/releases/
-create_folder /data/web_static/shared/
-create_folder /data/web_static/releases/test/
+mkdir -p /data/web_static/shared/
+mkdir -p /data/web_static/releases/test/
 
 # Create a fake HTML file
 
@@ -32,11 +23,7 @@ echo -e "$text"  > /data/web_static/releases/test/index.html
 
 symbolic_link="/data/web_static/current"
 
-if [ -L "$symbolic_link" ]; then
-    unlink "$symbolic_link"
-fi
-
-ln -s /data/web_static/releases/test/ "$symbolic_link"
+ln -sf /data/web_static/releases/test/ "$symbolic_link"
 
 # Change ownership and group of files.
 
