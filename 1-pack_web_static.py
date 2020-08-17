@@ -14,7 +14,8 @@ def do_pack():
         Otherwise, it should return None.
     """
     t = datetime.now()
-    formated = "{}{}{}{}{}".format(t.year, t.month, t.day, t.minute, t.second)
+    formated = "{}{}{}{}{}{}".format(t.year, t.month, t.day,
+                                     t.hour, t.minute, t.second)
     file = "versions/web_static_{}.tgz".format(formated)
 
     local('mkdir -p versions')
@@ -22,5 +23,4 @@ def do_pack():
 
     if r == 0:
         return file
-    else:
-        return None
+    return None
