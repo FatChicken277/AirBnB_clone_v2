@@ -4,6 +4,7 @@
 """
 from fabric.api import local
 from datetime import datetime
+from os import path
 
 
 def do_pack():
@@ -19,8 +20,8 @@ def do_pack():
     file = "versions/web_static_{}.tgz".format(formated)
 
     local('mkdir -p versions')
-    r = local('tar -czvf {} web_static/'.format(file))
+    local('tar -czvf {} web_static/'.format(file))
 
-    if r == 0:
+    if path.exists(file):
         return file
     return None
