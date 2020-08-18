@@ -82,11 +82,13 @@ def do_clean(number=0):
     Args:
         number (int, optional): option. Defaults to 0.
     """
-    if number <= 1:
+    if int(number) <= 1:
         number = 2
     else:
         number = int(number) + 1
     with lcd('versions/'):
-        local('ls -t | tail -n +{} | xargs -r rm'.format(number))
+        local('ls -t | grep web_static | tail -n +{} | xargs -r rm'.format(
+            number))
     with cd('/data/web_static/releases/'):
-        run('ls -t | tail -n +{} | xargs -r rm -r'.format(number))
+        run('ls -t | grep web_static | tail -n +{} | xargs -r rm -r'.format(
+            number))
