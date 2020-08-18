@@ -7,7 +7,6 @@ exec { 'update':
 
 package { 'nginx':
   ensure  => 'installed',
-  require => Exec['update'],
 }
 
 # create files drwxr-xr-x
@@ -73,7 +72,6 @@ file_line { 'config_file':
   path    => '/etc/nginx/sites-available/default',
   line    => "\tlocation /hbnb_static {\n\t\talias /data/web_static/current/;\n\t}\n",
   after   => 'listen 80 default_server;',
-  require => Package['nginx'],
 }
 
 # start server.
@@ -81,5 +79,4 @@ file_line { 'config_file':
 exec { 'restart':
   command => 'sudo service nginx restart',
   path    => ['/usr/bin', '/bin'],
-  require => File_line['config_file'],
 }
