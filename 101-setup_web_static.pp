@@ -6,10 +6,8 @@ exec { 'update':
 }
 
 package { 'nginx':
-  ensure   => 'installed',
-  name     => 'nginx',
-  provider => 'apt',
-  require  => Exec['update'],
+  ensure  => 'installed',
+  require => Exec['update'],
 }
 
 # create files drwxr-xr-x
