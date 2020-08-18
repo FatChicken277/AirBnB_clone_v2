@@ -12,38 +12,51 @@ package { 'nginx':
   require  => Exec['update'],
 }
 
-# create files
+# create files drwxr-xr-x
+
+file { '/data/':
+  ensure => directory,
+  mode   => '0755',
+  owner  => 'ubuntu',
+  group  => 'ubuntu',
+}
+
+file { '/data/web_static':
+  ensure => directory,
+  mode   => '0755',
+  owner  => 'ubuntu',
+  group  => 'ubuntu',
+}
+
+file { '/data/web_static/releases/':
+  ensure => directory,
+  mode   => '0755',
+}
 
 file { '/data/web_static/shared/':
-  ensure =>  directory,
+  ensure => directory,
+  mode   => '0755',
 }
 
 file { '/data/web_static/releases/test/':
-  ensure =>  directory,
+  ensure => directory,
+  mode   => '0755',
 }
 
 # html
 
 file { '/data/web_static/releases/test/index.html':
   ensure  => file,
+  mode    => '0755',
   content => "<html>\n\t<head>\n\t</head>\n\t<body>\n\t\tHolberton School\n\t</body>\n</html>\n",
-  require => File['/data/web_static/releases/test/'],
 }
 
 # create symbolic link
 
 file { '/data/web_static/current':
-  ensure  => link,
-  target  => '/data/web_static/releases/test/',
-  require => File['/data/web_static/releases/test/'],
-}
-
-# Change owner and group
-
-exec { 'owne_group':
-  command => 'chown -R ubuntu:ubuntu /data/',
-  path    => ['/usr/bin', '/bin'],
-  require => File['/data/web_static/shared/']
+  ensure => link,
+  target => '/data/web_static/releases/test',
+  mode   => '0777',
 }
 
 # config
