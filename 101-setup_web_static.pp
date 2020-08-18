@@ -1,9 +1,3 @@
-# install nginx
-
-package { 'nginx':
-  ensure  => 'installed',
-}
-
 # create files drwxr-xr-x
 
 file { '/data/':
