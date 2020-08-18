@@ -31,16 +31,22 @@ file { '/data/web_static':
 file { '/data/web_static/releases/':
   ensure => directory,
   mode   => '0755',
+  owner  => 'ubuntu',
+  group  => 'ubuntu',
 }
 
 file { '/data/web_static/shared/':
   ensure => directory,
   mode   => '0755',
+  owner  => 'ubuntu',
+  group  => 'ubuntu',
 }
 
 file { '/data/web_static/releases/test/':
   ensure => directory,
   mode   => '0755',
+  owner  => 'ubuntu',
+  group  => 'ubuntu',
 }
 
 # html
@@ -49,6 +55,8 @@ file { '/data/web_static/releases/test/index.html':
   ensure  => file,
   mode    => '0755',
   content => "<html>\n\t<head>\n\t</head>\n\t<body>\n\t\tHolberton School\n\t</body>\n</html>\n",
+  owner  => 'ubuntu',
+  group  => 'ubuntu',
 }
 
 # create symbolic link
@@ -57,6 +65,8 @@ file { '/data/web_static/current':
   ensure => link,
   target => '/data/web_static/releases/test',
   mode   => '0777',
+  owner  => 'ubuntu',
+  group  => 'ubuntu',
 }
 
 # config
