@@ -20,6 +20,7 @@ exec { 'shared':
 exec { 'test':
   command => 'mkdir -p /data/web_static/releases/test/',
   path    => ['/usr/bin', '/bin'],
+  require => Exec['shared'],
 }
 
 # html
@@ -27,6 +28,7 @@ exec { 'test':
 file { '/data/web_static/releases/test/index.html':
   ensure  => file,
   content => "<html>\n\t<head>\n\t</head>\n\t<body>\n\t\tHolberton School\n\t</body>\n</html>\n",
+  require => Exec['test'],
 }
 
 # create symbolic link
@@ -34,6 +36,7 @@ file { '/data/web_static/releases/test/index.html':
 file { '/data/web_static/current':
   ensure  => link,
   target  => '/data/web_static/releases/test',
+  require => Exec['test'],
 }
 
 # Change ownership and group of files.
@@ -41,6 +44,7 @@ file { '/data/web_static/current':
 exec { 'owner_group':
   command => 'chown -R ubuntu:ubuntu /data/',
   path    => ['/usr/bin', '/bin'],
+  require => Exec['shared'],
 }
 
 # config
