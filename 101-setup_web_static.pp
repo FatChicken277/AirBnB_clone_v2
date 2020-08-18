@@ -15,18 +15,19 @@ package { 'nginx':
 # create files
 
 file { '/data/web_static/shared/':
-    ensure  =>  directory,
+  ensure =>  directory,
 }
 
 file { '/data/web_static/releases/test/':
-    ensure  =>  directory,
+  ensure =>  directory,
 }
 
 # html
 
 file { '/data/web_static/releases/test/index.html':
   ensure  => file,
-  content => "<html>\n\t<head>\n\t</head>\n\t<body>\n\t\tHolberton School\n\t</body>\n</html>"
+  content => "<html>\n\t<head>\n\t</head>\n\t<body>\n\t\tHolberton School\n\t</body>\n</html>\n",
+  require => File['/data/web_static/releases/test/'],
 }
 
 # create symbolic link
@@ -34,6 +35,7 @@ file { '/data/web_static/releases/test/index.html':
 file { '/data/web_static/current':
   ensure  => link,
   target  => '/data/web_static/releases/test/',
+  require => File['/data/web_static/releases/test/'],
 }
 
 # Change owner and group
@@ -41,6 +43,7 @@ file { '/data/web_static/current':
 exec { 'owne_group':
   command => 'chown -R ubuntu:ubuntu /data/',
   path    => ['/usr/bin', '/bin'],
+  require => File['/data/web_static/shared/']
 }
 
 # config
