@@ -24,7 +24,7 @@ def HBNB():
     Returns:
         str: message.
     """
-    return "HBNB!"
+    return "HBNB"
 
 
 @app.route('/c/<text>', strict_slashes=False)
