@@ -24,7 +24,7 @@ def HBNB():
     Returns:
         str: message.
     """
-    return "HBNB!"
+    return "HBNB"
 
 
 if __name__ == '__main__':
