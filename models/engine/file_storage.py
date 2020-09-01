@@ -67,3 +67,8 @@ class FileStorage:
             if key in FileStorage.__objects:
                 FileStorage.__objects.pop(key)
                 self.save()
+
+    def close(self):
+        """close method
+        """
+        self.reload()
