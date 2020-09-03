@@ -18,13 +18,7 @@ def states(id=None):
     """
     items = storage.all(State).values()
     if id is not None:
-        a = 0
-        for item in items:
-            if id == item.id:
-                a = 1
-                items = item
-        if a == 0:
-            items = None
+        items = storage.all(State).get("State.{}".format(id))
     return render_template('9-states.html', states=items, id=id)
 
 
